@@ -1,0 +1,139 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{url}
+
+% correct bad hyphenation here
+
+\title{Research Proposal}
+\author{}
+\date{}
+
+\newcommand{\namelistlabel}[1]{\mbox{#1}\hfil}
+\newenvironment{namelist}[1]{%1
+\begin{list}{}
+    {
+        \let\makelabel\namelistlabel
+        \settowidth{\labelwidth}{#1}
+        \setlength{\leftmargin}{1.1\labelwidth}
+    }
+  }{%1
+\end{list}}
+
+\begin{document}
+\maketitle
+
+\begin{namelist}{xxxxxxxxxxxx}
+\item[{\bf Title:}]
+  Bridging Event-B and Workraft with statically typed functional embedded 
+  domain-specific language.
+\item[{\bf Project:}]
+  Formal Methods for Design of Safety-Critical Processors (NSS1742)
+\item[{\bf Author:}]
+  Georgy Lukyanov
+\item[{\bf Supervisors:}]
+  Andrey Mokhov, Alexander Romanovsky
+\end{namelist}
+
+\section*{Background} 
+
+\emph{Domain-Specific Languages} (DSLs) are designed to have a maximal 
+expression for tasks in a particular domain (for example, VHDL for hardware
+description or \LaTeX~for typesetting). However, implementing a language
+from scratch may be tedious, time-consuming and error-prone. Therefore,
+DSLs are often embedded into existing general-purpose programming languages,
+which is particularly convenient for prototyping purposes.
+
+Modern functional programming languages such as Haskell offer a wide range of
+facilities for construction of \emph{Embedded Domain-Specific Languages} (EDSLs)
+that benefit from features of lightweight formal verification provided bythe
+rich type system and highly-tailored syntax achieved using various functional
+programming idioms~\cite{HudakDSLs}.
+
+To design resilient and reconfigurable systems, it is vital to have formal
+specification methods, simulation facilities and verification techniques.
+EDSLs can increase the productivity at every stage of hardware design:
+high-level specification
+languages help to describe the system functionality in a declarative way,
+software simulation environments allow to evaluate the system capabilities
+without fabricating an expensive prototype, and advanced types of the host
+language provide compiler-checked correctness guarantees for synthesis.
+
+The \textsc{Workcraft} framework provides three DSLs:
+
+\begin{itemize}
+\item Signal Transition Graphs (STGs), a signal-level DSL for
+specifying resilient asynchronous controllers~\cite{STG}.
+\item Conditional Partial Order Graphs (CPOGs), a DSL for specifying
+reconfigurable processor microarchitectures supported by optimal
+instruction encoding algorithms~\cite{ISA-formal}.
+\item Dataflow Structures (DFSs), a dataflow-level DSL
+for specifying dataflow computation graphs~\cite{DFS}.
+\end{itemize}
+
+\textsc{Workcraft} can synthesise and export models described in these DSLs into
+Verilog, a low-level language for hardware description, supported
+by conventional EDA tool chain.
+
+\section*{Aim} 
+
+In my work, I plan to focus on bridging Event-B~\cite{EventB}, 
+a high-level formal notation for the specification of system requirements and reconfiguration, and DSLs provided by \textsc{Workcraft}. 
+
+Dr. Andrey Mokhov has already developed a prototype of a bridging language, 
+named \emph{Farfalle}, an intermediate-level DSL embedded in Haskell for the description of reconfigurable processor microarchitectures. My goal is to refine
+its design and develop a production-ready DSL for processor specification 
+with formal semantics and hardware compilation/generation tools  
+
+\section*{Methodology}
+
+My closest aim is to perform exploration phase: 
+
+\begin{itemize} 
+\item Refinement of~\emph{Farfalle} architecture.
+\item Exploration of effectful computation typing techniques for EDSL
+construction (e.g. algebraic effects and effects handlers, monad transformers).
+\item Exploration of different hosting languages (e.g. Haskell, Idris and proof-assistants like Coq, Agda, etc.) and its features in context of hardware specification domain.
+\end{itemize}
+
+Then, when hosting language and EDSL architecture have been chosen, 
+and prototype has been implemented, \textsc{Workcraft} and Event-B integration 
+phase may be started. In order to complete is, following large-scale goals
+must be accomplished:
+
+\begin{itemize} 
+\item Connect Event-B and designed intermediate EDSL with bidirectional code
+generator, supplying proofs of translation soundness.
+\item Implement a code generator connecting designed EDSL to \textsc{Workcraft}
+internal representations.
+\end{itemize}
+
+\begin{thebibliography}{7}
+
+\bibitem{ISA-formal}
+A. Mokhov et al.
+\emph{``Synthesis of processor instruction sets from high-level ISA specifications''}. IEEE Transaction on Computers 2014, vol. 63(6).
+
+\bibitem{workcraft_web}
+    \textsc{Workcraft} framework homepage: \url{http://www.workcraft.org/}.
+
+\bibitem{rec-proc}
+  A. Mokhov, M. Rykunov, D. Sokolov, A. Yakovlev.
+  \emph{``Design of Processors with Reconfigurable Microarchitecture''}.
+  J. Low Power Electronics Application, 2014, vol. 4(1), pp. 26-43.
+
+\bibitem{HudakDSLs}
+  P. Hudak.
+  \emph{``Modular Domain Specific Languages and Tools''}.
+  Proceedings of the International Conference on Software Reuse, 1998, p. 134.
+
+\bibitem{STG}
+J. Cortadella et al. \emph{``Logic synthesis for asynchronous controllers and interfaces''}, Springer, 2012.
+
+\bibitem{DFS}
+  D. Sokolov, I. Poliakov, A. Yakovlev. \emph{``Analysis of static data flow structures''}. Fundamenta Informaticae, vol. 88(4), pp. 581-610, 2008.
+
+\bibitem{EventB}
+  J-R. Abrial. \emph{Modeling in Event-B: system and software engineering}. Cambridge University Press, 2010.
+
+\end{thebibliography}
+
+\end{document}
