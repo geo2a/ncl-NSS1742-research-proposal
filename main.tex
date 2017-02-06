@@ -23,17 +23,34 @@
 
 \begin{namelist}{xxxxxxxxxxxx}
 \item[{\bf Title:}]
-  Bridging Event-B and Workraft with statically typed functional embedded 
-  domain-specific language.
-\item[{\bf Project:}]
   Formal Methods for Design of Safety-Critical Processors (NSS1742)
 \item[{\bf Author:}]
   Georgy Lukyanov
 \item[{\bf Supervisors:}]
-  Andrey Mokhov, Alexander Romanovsky
+  Andrey Mokhov, Alexander Romanovsky, Patrick Degenaar, Shang-Wei Lin
 \end{namelist}
 
-\section*{Background} 
+\section{Background} 
+
+Many resilient systems rely on runtime reconfigurability
+to adapt to continuously changing environment without any
+human intervention. For example, biomedical implants must
+be able to operate autonomously within patients, adapting
+to short-term and long-term changes, with required lifetimes
+in the order of decades. Runtime reconfigurability can be
+achieved both in hardware and software; the latter is less challenging 
+to implement, however, the former is often unavoidable.
+
+Formal methods provide a systematic approach for developing complex systems 
+in a reusable and correct-by-construction manner.
+
+One class of formal methods is advanced type systems provided by modern
+programming languages. Curry-Howard correspondence --- a direct relationship
+between computer programs and mathematical proofs enables software developers
+to formulate desired properties of programs in terms of types and automatically 
+acquire proofs of correctness those programs through type checking.
+
+\subsection{Domain-specific languages for safety-critical design}
 
 \emph{Domain-Specific Languages} (DSLs) are designed to have a maximal 
 expression for tasks in a particular domain (for example, VHDL for hardware
@@ -57,41 +74,39 @@ software simulation environments allow to evaluate the system capabilities
 without fabricating an expensive prototype, and advanced types of the host
 language provide compiler-checked correctness guarantees for synthesis.
 
-The \textsc{Workcraft} framework provides three DSLs:
+\section{Aim} 
 
-\begin{itemize}
-\item Signal Transition Graphs (STGs), a signal-level DSL for
-specifying resilient asynchronous controllers~\cite{STG}.
-\item Conditional Partial Order Graphs (CPOGs), a DSL for specifying
-reconfigurable processor microarchitectures supported by optimal
-instruction encoding algorithms~\cite{ISA-formal}.
-\item Dataflow Structures (DFSs), a dataflow-level DSL
-for specifying dataflow computation graphs~\cite{DFS}.
-\end{itemize}
+The goal of this project is to advance the theory and
+engineering practice of custom processor design, with
+particular focus on safety-critical and energy-constrained
+applications, such as biomedical implants.
 
-\textsc{Workcraft} can synthesise and export models described in these DSLs into
-Verilog, a low-level language for hardware description, supported
-by conventional EDA tool chain.
-
-\section*{Aim} 
+The developed software tools will be based on Rodin 
+(\url{www.rodintools.org}) and Workcraft 
+(\url{www.workcraft.org}) frameworks developed at Newcastle University, 
+which are known and used worldwide.
 
 In my work, I plan to focus on bridging Event-B~\cite{EventB}, 
-a high-level formal notation for the specification of system requirements and reconfiguration, and DSLs provided by \textsc{Workcraft}. 
+a high-level formal notation for the specification of system requirements 
+and reconfiguration, a part of the Rodin tool set, 
+and \textsc{Workcraft}. 
 
 Dr. Andrey Mokhov has already developed a prototype of a bridging language, 
-named \emph{Farfalle}, an intermediate-level DSL embedded in Haskell for the description of reconfigurable processor microarchitectures. My goal is to refine
-its design and develop a production-ready DSL for processor specification 
-with formal semantics and hardware compilation/generation tools  
+named \emph{Farfalle}, an intermediate-level embedded domain-specific language
+for the description of reconfigurable processor microarchitectures. 
+My goal is to refine its design and develop a production-ready DSL for processor
+specification with formal semantics and hardware compilation/generation tools.
 
-\section*{Methodology}
+\section{Methodology}
 
 My closest aim is to perform exploration phase: 
 
 \begin{itemize} 
+\item Exploration of different type systems and hosting languages 
+(e.g. Haskell, Idris and proof-assistants like Coq, Agda, etc.) and its 
+features in context of hardware specification domain.
+\item Exploration of EDSL architectures.
 \item Refinement of~\emph{Farfalle} architecture.
-\item Exploration of effectful computation typing techniques for EDSL
-construction (e.g. algebraic effects and effects handlers, monad transformers).
-\item Exploration of different hosting languages (e.g. Haskell, Idris and proof-assistants like Coq, Agda, etc.) and its features in context of hardware specification domain.
 \end{itemize}
 
 Then, when hosting language and EDSL architecture have been chosen, 
