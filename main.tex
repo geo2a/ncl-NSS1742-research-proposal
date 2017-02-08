@@ -1,11 +1,15 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[10pt, a4paper]{article}
 \usepackage{url}
+\usepackage[scale=0.75]{geometry} % Reduce document margins
 
 % correct bad hyphenation here
 
 \title{Research Proposal}
 \author{}
 \date{}
+
+\usepackage [style = gost-numeric] {biblatex}
+\addbibresource {biblio.bib}
 
 \newcommand{\namelistlabel}[1]{\mbox{#1}\hfil}
 \newenvironment{namelist}[1]{%1
@@ -39,16 +43,35 @@ be able to operate autonomously within patients, adapting
 to short-term and long-term changes, with required lifetimes
 in the order of decades. Runtime reconfigurability can be
 achieved both in hardware and software; the latter is less challenging 
-to implement, however, the former is often unavoidable.
+to implement, for the reason that creation of new hardware is extremely 
+expensive and challenging in comparison to software development. However, the
+former is often unavoidable, because autonomy and resiliency requirements often
+could not be met with general-purpose hardware, thus making necessary to
+develop a custom solution.
 
-Formal methods provide a systematic approach for developing complex systems 
-in a reusable and correct-by-construction manner.
+In contrast with post-design testing, that doesn't provide full correctness
+guarantees, formal methods provide a systematic approach for developing complex
+systems in a correct-by-construction manner. One reason of advancement of formal
+methods in comparison to testing is maximal possible elimination of human errors.
+For instance, techniques known as model checking perform exhaustive search through
+entire space of possible states of the system and evaluating system status in
+every single state, completely excluding any possibility of non-specified
+behaviour (presuming correctness of specification).
 
 One class of formal methods is advanced type systems provided by modern
-programming languages. Curry-Howard correspondence --- a direct relationship
-between computer programs and mathematical proofs enables software developers
-to formulate desired properties of programs in terms of types and automatically 
-acquire proofs of correctness those programs through type checking.
+programming languages. Powerful yet lightweight formal verification techniques,
+provided by this languages are based on famous Curry-Howard correspondence ---
+a direct relationship between computer programs and mathematical proofs that
+was discovered by the American mathematician Haskell Curry and logician William
+Alvin Howard in late 1960s. A perfectly written Philip Wadler's paper, called
+``Propositions as Types''~\cite{Wadler:2015:PT:2847579.2699407} contains great
+set of historical notes alongside with
+points of view on Curry-Howard correspondence from different fields of
+mathematics and computer science. 
+Curry-Howard correspondence is of great value for software developers because
+it provides a possibility to formulate desired
+properties of programs in terms of types and automatically acquire proofs of
+correctness of those programs through type checking.
 
 \subsection{Domain-specific languages for safety-critical design}
 
@@ -61,18 +84,18 @@ which is particularly convenient for prototyping purposes.
 
 Modern functional programming languages such as Haskell offer a wide range of
 facilities for construction of \emph{Embedded Domain-Specific Languages} (EDSLs)
-that benefit from features of lightweight formal verification provided bythe
+that benefit from features of lightweight formal verification provided by the
 rich type system and highly-tailored syntax achieved using various functional
-programming idioms~\cite{HudakDSLs}.
+programming idioms~\cite{Hudak:1998:MDS:551789.853532}.
 
 To design resilient and reconfigurable systems, it is vital to have formal
 specification methods, simulation facilities and verification techniques.
 EDSLs can increase the productivity at every stage of hardware design:
-high-level specification
-languages help to describe the system functionality in a declarative way,
-software simulation environments allow to evaluate the system capabilities
-without fabricating an expensive prototype, and advanced types of the host
-language provide compiler-checked correctness guarantees for synthesis.
+high-level specification languages help to describe the system functionality
+in a declarative way, software simulation environments allow to evaluate the
+system capabilities without fabricating an expensive prototype, and advanced
+types of the host language provide compiler-checked correctness guarantees for
+synthesis.
 
 \section{Aim} 
 
@@ -82,20 +105,32 @@ particular focus on safety-critical and energy-constrained
 applications, such as biomedical implants.
 
 The developed software tools will be based on Rodin 
-(\url{www.rodintools.org}) and Workcraft 
-(\url{www.workcraft.org}) frameworks developed at Newcastle University, 
-which are known and used worldwide.
+(\url{www.rodintools.org}), Event-B (\url{http://www.event-b.org/}) and
+Workcraft (\url{www.workcraft.org}) frameworks developed at Newcastle
+University, which are known and used worldwide. One of the project supervisors,
+Prof Romanovsky is a world-leading expert in Event-B and Rodin.
 
-In my work, I plan to focus on bridging Event-B~\cite{EventB}, 
-a high-level formal notation for the specification of system requirements 
-and reconfiguration, a part of the Rodin tool set, 
-and \textsc{Workcraft}. 
+In my work, I plan to focus on bridging Event-B, a high-level formal notation
+for the specification of system requirements 
+and reconfiguration, a part of the Rodin tool set, and \textsc{Workcraft}. 
 
-Dr. Andrey Mokhov has already developed a prototype of a bridging language, 
-named \emph{Farfalle}, an intermediate-level embedded domain-specific language
-for the description of reconfigurable processor microarchitectures. 
-My goal is to refine its design and develop a production-ready DSL for processor
-specification with formal semantics and hardware compilation/generation tools.
+Dr. Andrey Mokhov and his research team have already developed a prototype of a
+bridging language, named \emph{Farfalle}, an intermediate-level embedded
+domain-specific language for the description of reconfigurable processor
+microarchitectures. My goal is to refine its design and develop a
+production-ready DSL for processor specification enriched with formal semantics 
+and hardware generation tools, with assistance and expertise from Prof 
+Shang-Wei Lin research group from Nanyang Technological University
+~\cite{Lin:2014:CSC:2962288.2962317}.  
+
+I have already started to contribute to Dr. Mokhov's team on-going research
+work and we have published a joint paper "Prototyping Resilient Processing Cores
+in Workcraft" which was accepted at the 2nd International Workshop on Resiliency
+in Embedded Electronic Systems that is a part of DATE'17 --- the top European
+conference on Electronic Design Automation that will take place in Lausanne,
+Switzerland, in March 2017. We are currently preparing an extended version of
+the paper, which will be published by IEEE, and my section on domain-specific
+languages plays the central role in the paper.
 
 \section{Methodology}
 
@@ -121,34 +156,6 @@ generator, supplying proofs of translation soundness.
 internal representations.
 \end{itemize}
 
-\begin{thebibliography}{7}
-
-\bibitem{ISA-formal}
-A. Mokhov et al.
-\emph{``Synthesis of processor instruction sets from high-level ISA specifications''}. IEEE Transaction on Computers 2014, vol. 63(6).
-
-\bibitem{workcraft_web}
-    \textsc{Workcraft} framework homepage: \url{http://www.workcraft.org/}.
-
-\bibitem{rec-proc}
-  A. Mokhov, M. Rykunov, D. Sokolov, A. Yakovlev.
-  \emph{``Design of Processors with Reconfigurable Microarchitecture''}.
-  J. Low Power Electronics Application, 2014, vol. 4(1), pp. 26-43.
-
-\bibitem{HudakDSLs}
-  P. Hudak.
-  \emph{``Modular Domain Specific Languages and Tools''}.
-  Proceedings of the International Conference on Software Reuse, 1998, p. 134.
-
-\bibitem{STG}
-J. Cortadella et al. \emph{``Logic synthesis for asynchronous controllers and interfaces''}, Springer, 2012.
-
-\bibitem{DFS}
-  D. Sokolov, I. Poliakov, A. Yakovlev. \emph{``Analysis of static data flow structures''}. Fundamenta Informaticae, vol. 88(4), pp. 581-610, 2008.
-
-\bibitem{EventB}
-  J-R. Abrial. \emph{Modeling in Event-B: system and software engineering}. Cambridge University Press, 2010.
-
-\end{thebibliography}
+\printbibliography
 
 \end{document}
