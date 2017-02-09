@@ -8,7 +8,7 @@
 \author{}
 \date{}
 
-\usepackage [style = gost-numeric] {biblatex}
+\usepackage [maxbibnames=5, style = gost-numeric] {biblatex}
 \addbibresource {biblio.bib}
 
 \newcommand{\namelistlabel}[1]{\mbox{#1}\hfil}
@@ -60,7 +60,7 @@ behaviour (presuming correctness of specification).
 
 One class of formal methods is advanced type systems provided by modern
 programming languages. Powerful yet lightweight formal verification techniques,
-provided by this languages are based on famous Curry-Howard correspondence ---
+provided by these languages are based on famous Curry-Howard correspondence ---
 a direct relationship between computer programs and mathematical proofs that
 was discovered by the American mathematician Haskell Curry and logician William
 Alvin Howard in late 1960s. A perfectly written Philip Wadler's paper, called
@@ -108,7 +108,8 @@ The developed software tools will be based on Rodin
 (\url{www.rodintools.org}), Event-B (\url{http://www.event-b.org/}) and
 Workcraft (\url{www.workcraft.org}) frameworks developed at Newcastle
 University, which are known and used worldwide. One of the project supervisors,
-Prof Romanovsky is a world-leading expert in Event-B and Rodin.
+Prof Romanovsky is a world-leading expert in Event-B and Rodin, and Dr Mokhov is
+one of the leaders of the Workcraft project.
 
 In my work, I plan to focus on bridging Event-B, a high-level formal notation
 for the specification of system requirements 
@@ -117,26 +118,30 @@ and reconfiguration, a part of the Rodin tool set, and \textsc{Workcraft}.
 Dr. Andrey Mokhov and his research team have already developed a prototype of a
 bridging language, named \emph{Farfalle}, an intermediate-level embedded
 domain-specific language for the description of reconfigurable processor
-microarchitectures. My goal is to refine its design and develop a
-production-ready DSL for processor specification enriched with formal semantics 
-and hardware generation tools, with assistance and expertise from Prof 
-Shang-Wei Lin research group from Nanyang Technological University
+microarchitectures~\cite{WorkraftREES}. My goal is to refine its design and
+develop a production-ready DSL for processor specification enriched with
+formal semantics and hardware generation tools, with assistance and expertise 
+from Prof Shang-Wei Lin research group from Nanyang Technological University
 ~\cite{Lin:2014:CSC:2962288.2962317}.  
 
 I have already started to contribute to Dr. Mokhov's team on-going research
 work and we have published a joint paper "Prototyping Resilient Processing Cores
-in Workcraft" which was accepted at the 2nd International Workshop on Resiliency
-in Embedded Electronic Systems that is a part of DATE'17 --- the top European
-conference on Electronic Design Automation that will take place in Lausanne,
-Switzerland, in March 2017. We are currently preparing an extended version of
-the paper, which will be published by IEEE, and my section on domain-specific
-languages plays the central role in the paper.
+in Workcraft"~\cite{WorkraftREES} which has been accepted at the 2nd 
+International Workshop on Resiliency in Embedded Electronic Systems that is a
+part of DATE'17 --- the top European conference on Electronic Design Automation
+that will take place in Lausanne, Switzerland, in March 2017. We are currently
+preparing an extended version of the paper, which will be published by IEEE,
+and my section on domain-specific languages plays the central role in the paper,
+providing a solid foundation for my PhD research.
 
 \section{Methodology}
 
 My closest aim is to perform exploration phase: 
 
 \begin{itemize} 
+\item Analysis of application requirements using biomedical implants as the main
+case study. Expertise on biomedical implants is available from Dr Degenaar, one
+of the PhD co-supervisors.
 \item Exploration of different type systems and hosting languages 
 (e.g. Haskell, Idris and proof-assistants like Coq, Agda, etc.) and its 
 features in context of hardware specification domain.
@@ -154,6 +159,8 @@ must be accomplished:
 generator, supplying proofs of translation soundness.
 \item Implement a code generator connecting designed EDSL to \textsc{Workcraft}
 internal representations.
+\item Validation of the developed tools by designing a prototype of a resilient
+processor.
 \end{itemize}
 
 \printbibliography
